@@ -9,7 +9,7 @@
 # compare with previous scan
 # and send result by mail
 #
-# Depends : nmap (with ndiff) and xsltproc
+# Dependencies : nmap, ndiff and xsltproc
 #
 ###
 
