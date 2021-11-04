@@ -14,7 +14,6 @@
 ###
 
 targets="192.168.0.0/24"
-options=""
 path=.
 mailto=mail@address.com
 message="Send by nmail.sh"
@@ -24,7 +23,7 @@ then
     mv -f "$path/new_scan.xml" "$path/prev_scan.xml"
 fi
 
-nmap $options $targets -oX "$path/new_scan.xml"
+nmap $targets -oX "$path/new_scan.xml"
 
 if [ -f "$path/prev_scan.xml" ]
 then
