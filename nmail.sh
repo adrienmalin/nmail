@@ -13,8 +13,9 @@
 #
 ###
 
+basedir=$(dirname "$0")
 targets="192.168.0.0/24"
-path=.
+path=$basedir
 mailto=mail@address.com
 message="Send by nmail.sh"
 
@@ -23,11 +24,13 @@ then
     mv -f "$path/new_scan.xml" "$path/prev_scan.xml"
 fi
 
-nmap $targets -oX "$path/new_scan.xml"
+nmap $targets -T4 -oX "$path/new_scan.xml"
 
 if [ -f "$path/prev_scan.xml" ]
 then
-    ndiff --xml "$path/prev_scan.xml" "$path/new_scan.xml" | xsltproc nmail.xsl - | while read -r line
+    ndiff --xml "$path/prev_scan.xml" "$path/new_scan.xml" | \
+    xsltproc "$basedir\nmail.xsl" - | \
+    while read -r line
     do
         echo $message | mail $mailto -s "$line"   
     done
